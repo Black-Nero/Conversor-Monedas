@@ -30,7 +30,7 @@ public class Menu {
         double cantidad = scanner.nextDouble();
 
         try {
-            ConversorDivisas conversor = new ConversorDivisas();
+            ConvertidorDeMonedas conversor = new ConvertidorDeMonedas();
             double resultado = conversor.convertir(cantidad, divisaDesde, divisaHasta);
             System.out.println(cantidad + " " + divisaDesde + " equivale a " + resultado + " " + divisaHasta);
         } catch (Exception e) {

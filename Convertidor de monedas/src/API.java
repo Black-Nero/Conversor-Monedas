@@ -12,7 +12,7 @@ import java.util.List;
 
 public class API {
     private static final String URL_BASE = "https://v6.exchangerate-api.com/v6/";
-    private static final String API_KEY = "870a5457fda0efaaca974f8b";
+    private static final String API_KEY = "6468a3d095fa0b992336df0";
 
     public static JsonObject obtenerDatos(String DivisaOrigen, String divisaDestino) throws Exception {
         String urlFinal = URL_BASE + API_KEY + "/pair/" + DivisaOrigen+ "/" + divisaDestino;
@@ -35,19 +35,15 @@ public class API {
     public static List<String[]> obtenerDivisasSoportadas() throws Exception {
         String urlFinal = URL_BASE + API_KEY + "/codes";
         URL url = new URL(urlFinal);
-
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
         request.connect();
-
         JsonParser jp = new JsonParser();
         JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
         JsonObject jsonobj = root.getAsJsonObject();
-
         String resultadoSolicitud = jsonobj.get("result").getAsString();
         if (!"success".equals(resultadoSolicitud)) {
             throw new IllegalStateException("Error en la solicitud a la API: " + resultadoSolicitud);
         }
-
         List<String[]> divisasSoportadas = new ArrayList<>();
         JsonArray supportedCodes = jsonobj.getAsJsonArray("supported_codes");
         for (JsonElement elemento : supportedCodes) {
@@ -56,6 +52,5 @@ public class API {
             String nombre = par.get(1).getAsString();
             divisasSoportadas.add(new String[]{codigo, nombre});
         }
-
         return divisasSoportadas;
-    }
+    }}

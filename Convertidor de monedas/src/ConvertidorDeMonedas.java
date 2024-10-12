@@ -1,7 +1,7 @@
 import com.google.gson.JsonObject;
 import java.util.Map;
 
-public class ConversorDivisas {
+public class ConvertidorDeMonedas {
     public static double obtenerTasaCambio(String divisaOrigen, String divisaDestino) throws Exception {
         JsonObject jsonobj = API.obtenerDatos(divisaOrigen, divisaDestino);
         return jsonobj.get("conversion_rate").getAsDouble();
